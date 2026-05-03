@@ -1,0 +1,616 @@
+<!DOCTYPE html>
+<html lang="en" style="background:#0a0a0a;color:#f0f0eb;">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Pavitr Kumar Swain</title>
+<link href="https://fonts.googleapis.com/css2?family=Fragment+Mono:ital@0;1&family=Playfair+Display:ital,wght@0,700;0,900;1,400;1,700&family=Inter:wght@300;400;500&display=swap" rel="stylesheet"/>
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; background-color: #0a0a0a !important; }
+
+:root {
+  --bg: #0a0a0a;
+  --surface: #111111;
+  --surface2: #1a1a1a;
+  --white: #f0f0eb;
+  --off: #999990;
+  --dim: #444440;
+  --accent: #c9b99a;
+  --line: rgba(240,240,235,0.1);
+}
+
+body {
+  font-family: 'Inter', sans-serif;
+  background-color: #0a0a0a !important;
+  background: #0a0a0a !important;
+  color: #f0f0eb !important;
+  overflow-x: hidden;
+  cursor: none;
+  -webkit-text-size-adjust: 100%;
+}
+
+/* CURSOR */
+.cur { position:fixed; width:8px; height:8px; background:var(--white); border-radius:50%; pointer-events:none; z-index:9999; transform:translate(-50%,-50%); mix-blend-mode:difference; }
+.cur-r { position:fixed; width:30px; height:30px; border:1px solid rgba(240,240,235,0.35); border-radius:50%; pointer-events:none; z-index:9998; transform:translate(-50%,-50%); }
+
+/* NAV */
+nav {
+  position:fixed; top:0; left:0; right:0; z-index:200;
+  height:56px; padding:0 48px;
+  display:flex; justify-content:space-between; align-items:center;
+  background:#0a0a0a;
+  border-bottom:1px solid rgba(240,240,235,0.1);
+}
+.nav-name {
+  font-family:'Playfair Display',serif;
+  font-weight:700; font-size:1rem; color:var(--white);
+}
+.nav-links { display:flex; list-style:none; }
+.nav-links a {
+  font-family:'Fragment Mono',monospace; font-size:0.68rem;
+  color:var(--off); text-decoration:none; letter-spacing:0.08em;
+  padding:0 16px; height:56px; display:flex; align-items:center;
+  border-left:1px solid var(--line);
+  transition:color .2s, background .2s;
+}
+.nav-links a:hover { color:var(--white); background:rgba(255,255,255,0.03); }
+.nav-cta {
+  font-family:'Fragment Mono',monospace; font-size:0.68rem;
+  color:var(--bg); background:var(--white);
+  padding:8px 16px; border-radius:2px; text-decoration:none;
+  letter-spacing:0.08em; transition:opacity .2s;
+}
+.nav-cta:hover { opacity:.82; }
+
+/* HERO */
+#hero {
+  min-height:100vh;
+  display:grid; grid-template-columns:1fr 380px;
+  align-items:end;
+  padding:100px 48px 60px;
+  border-bottom:1px solid var(--line);
+  gap:48px; position:relative;
+}
+.hero-left { padding-bottom:8px; }
+.hero-tag {
+  display:inline-flex; align-items:center; gap:10px;
+  font-family:'Fragment Mono',monospace; font-size:0.65rem;
+  color:var(--off); letter-spacing:0.12em; text-transform:uppercase;
+  margin-bottom:36px;
+  opacity:0; animation:up .5s .1s ease forwards;
+}
+.live-dot {
+  width:7px; height:7px; border-radius:50%;
+  background:#52d77e; box-shadow:0 0 10px #52d77e;
+  animation:blink 2s infinite;
+}
+@keyframes blink { 0%,100%{opacity:1} 50%{opacity:.25} }
+
+h1 {
+  font-family:'Playfair Display',serif; font-weight:900;
+  font-size:clamp(3.2rem,7.5vw,6.8rem); line-height:.94;
+  letter-spacing:-0.025em; color:var(--white);
+  margin-bottom:36px;
+  opacity:0; animation:up .6s .15s ease forwards;
+}
+h1 em { font-style:italic; color:var(--accent); font-weight:400; }
+
+.hero-desc {
+  font-size:.975rem; color:var(--off); line-height:1.8;
+  max-width:520px; margin-bottom:36px;
+  opacity:0; animation:up .6s .25s ease forwards;
+}
+.hero-desc strong { color:var(--white); font-weight:500; }
+
+.hero-btns {
+  display:flex; gap:10px;
+  opacity:0; animation:up .6s .35s ease forwards;
+}
+.btn-p {
+  padding:11px 26px; background:var(--white); color:var(--bg);
+  font-family:'Fragment Mono',monospace; font-size:0.72rem;
+  letter-spacing:0.08em; text-decoration:none; border-radius:2px;
+  transition:opacity .2s;
+}
+.btn-p:hover { opacity:.82; }
+.btn-s {
+  padding:11px 26px; background:transparent; color:var(--white);
+  font-family:'Fragment Mono',monospace; font-size:0.72rem;
+  letter-spacing:0.08em; text-decoration:none;
+  border:1px solid var(--dim); border-radius:2px;
+  transition:border-color .2s;
+}
+.btn-s:hover { border-color:var(--off); }
+
+/* Hero stats panel */
+.hero-stats {
+  border-left:1px solid var(--line);
+  padding-left:40px; align-self:end;
+  opacity:0; animation:up .6s .45s ease forwards;
+}
+.hstat {
+  padding:18px 0; border-bottom:1px solid var(--line);
+}
+.hstat:first-child { border-top:1px solid var(--line); }
+.hstat-n {
+  font-family:'Playfair Display',serif; font-weight:900;
+  font-size:2.6rem; color:var(--white); line-height:1;
+  margin-bottom:4px;
+}
+.hstat-l {
+  font-family:'Fragment Mono',monospace; font-size:0.62rem;
+  color:var(--off); letter-spacing:0.1em; text-transform:uppercase;
+}
+
+.hero-scroll {
+  position:absolute; bottom:28px; left:48px;
+  display:flex; align-items:center; gap:12px;
+  font-family:'Fragment Mono',monospace; font-size:0.62rem;
+  color:var(--dim); letter-spacing:0.12em; text-transform:uppercase;
+  opacity:0; animation:up .5s .7s ease forwards;
+}
+.scroll-bar { width:44px; height:1px; background:var(--dim); position:relative; overflow:hidden; }
+.scroll-bar::after {
+  content:''; position:absolute; inset:0;
+  background:var(--off); animation:scan 2.8s ease-in-out infinite;
+}
+@keyframes scan { 0%{transform:translateX(-100%)} 100%{transform:translateX(250%)} }
+@keyframes up { from{opacity:0;transform:translateY(18px)} to{opacity:1;transform:translateY(0)} }
+
+/* SECTION SHELL */
+.sw {
+  display:grid; grid-template-columns:196px 1fr;
+  border-bottom:1px solid var(--line);
+}
+.slc {
+  padding:56px 28px 56px 48px;
+  border-right:1px solid var(--line);
+}
+.slc span {
+  font-family:'Fragment Mono',monospace; font-size:0.62rem;
+  color:var(--dim); letter-spacing:0.14em; text-transform:uppercase;
+  position:sticky; top:72px; display:block;
+}
+.sc { padding:56px 48px; }
+
+/* section heading */
+.sh {
+  font-family:'Playfair Display',serif; font-weight:700;
+  font-size:clamp(1.7rem,2.8vw,2.3rem); line-height:1.1;
+  color:var(--white); margin-bottom:36px;
+}
+.sh em { font-style:italic; color:var(--accent); font-weight:400; }
+
+/* ABOUT */
+.sc p { font-size:.95rem; color: #999990; line-height:1.82; margin-bottom:16px; max-width:620px; }
+.sc p strong { color: #f0f0eb; font-weight:500; }
+
+.facts {
+  display:grid; grid-template-columns:1fr 1fr; gap:1px;
+  border:1px solid var(--line); background:var(--line);
+  border-radius:3px; overflow:hidden; margin-top:36px;
+}
+.fact { background: #111111; padding:18px 22px; }
+.fk {
+  font-family:'Fragment Mono',monospace; font-size:0.6rem;
+  color:var(--dim); letter-spacing:0.12em; text-transform:uppercase;
+  margin-bottom:5px;
+}
+.fv { font-size:0.88rem; color:var(--white); line-height:1.4; }
+
+/* SKILLS */
+.stbl { width:100%; border-collapse:collapse; }
+.stbl tr { border-bottom:1px solid var(--line); }
+.stbl tr:last-child { border-bottom:none; }
+.stbl td { padding:14px 0; vertical-align:top; }
+.stbl td:first-child {
+  width:168px; padding-right:20px;
+  font-family:'Fragment Mono',monospace; font-size:0.62rem;
+  color:var(--dim); letter-spacing:0.1em; text-transform:uppercase;
+  white-space:nowrap; padding-top:16px;
+}
+.pills { display:flex; flex-wrap:wrap; gap:6px; }
+.pill {
+  padding:5px 11px; border:1px solid var(--dim); border-radius:2px;
+  font-family:'Fragment Mono',monospace; font-size:0.65rem; color:var(--off);
+  transition:border-color .2s, color .2s;
+}
+.pill:hover { border-color:var(--off); color:var(--white); }
+
+/* EXPERIENCE */
+.exp {
+  padding:28px 0; border-bottom:1px solid rgba(240,240,235,0.1);
+  display:grid; grid-template-columns:1fr auto; gap:20px;
+  opacity:0; transform:translateY(14px);
+  transition:opacity .5s ease, transform .5s ease;
+}
+.exp.on { opacity:1; transform:translateY(0); }
+.exp:last-child { border-bottom:none; }
+.exp-role {
+  font-family:'Playfair Display',serif; font-weight:700;
+  font-size:1.08rem; color:var(--white); margin-bottom:3px;
+}
+.exp-co {
+  font-family:'Fragment Mono',monospace; font-size:0.68rem;
+  color:var(--accent); letter-spacing:0.05em; margin-bottom:12px;
+}
+.exp-ul { list-style:none; display:flex; flex-direction:column; gap:5px; }
+.exp-ul li {
+  font-size:0.86rem; color:var(--off); line-height:1.6;
+  padding-left:16px; position:relative;
+}
+.exp-ul li::before { content:'—'; position:absolute; left:0; color:var(--dim); }
+.exp-period {
+  font-family:'Fragment Mono',monospace; font-size:0.62rem;
+  color:var(--dim); letter-spacing:0.06em; white-space:nowrap;
+  text-align:right; padding-top:3px;
+}
+
+/* PROJECTS */
+.pgrid {
+  display:grid; grid-template-columns:1fr 1fr;
+  gap:1px; background:var(--line);
+  border:1px solid var(--line); border-radius:3px; overflow:hidden;
+}
+.pcard {
+  background: #111111; padding:28px 24px;
+  opacity:0; transform:translateY(14px);
+  transition:opacity .5s ease, transform .5s ease, background .2s;
+}
+.pcard.on { opacity:1; transform:translateY(0); }
+.pcard:hover { background:var(--surface2); }
+.pnum {
+  font-family:'Fragment Mono',monospace; font-size:0.58rem;
+  color:var(--dim); letter-spacing:0.12em; margin-bottom:14px;
+}
+.ptitle {
+  font-family:'Playfair Display',serif; font-weight:700;
+  font-size:1.05rem; color:var(--white); margin-bottom:9px; line-height:1.2;
+}
+.pdesc { font-size:0.84rem; color:var(--off); line-height:1.65; margin-bottom:18px; }
+.ppills { display:flex; flex-wrap:wrap; gap:5px; }
+.ppill {
+  padding:3px 9px; border-radius:2px;
+  background:rgba(201,185,154,0.07);
+  border:1px solid rgba(201,185,154,0.18);
+  font-family:'Fragment Mono',monospace; font-size:0.6rem; color:var(--accent);
+}
+
+/* CERTS */
+.clist { display:flex; flex-direction:column; }
+.crow {
+  display:flex; align-items:center; gap:18px;
+  padding:16px 0; border-top:1px solid var(--line);
+  opacity:0; transform:translateY(10px);
+  transition:opacity .4s ease, transform .4s ease;
+}
+.crow:last-child { border-bottom:1px solid var(--line); }
+.crow.on { opacity:1; transform:translateY(0); }
+.cnum { font-family:'Fragment Mono',monospace; font-size:0.58rem; color:var(--dim); width:26px; flex-shrink:0; }
+.cname { flex:1; font-size:0.88rem; color:var(--white); }
+.cby { font-family:'Fragment Mono',monospace; font-size:0.62rem; color:var(--off); letter-spacing:0.05em; }
+
+/* ACHIEVEMENTS */
+.agrid {
+  display:grid; grid-template-columns:repeat(3,1fr);
+  gap:1px; background:var(--line);
+  border:1px solid var(--line); border-radius:3px; overflow:hidden;
+}
+.acard {
+  background: #111111; padding:24px 20px;
+  opacity:0; transform:translateY(14px);
+  transition:opacity .5s ease, transform .5s ease, background .2s;
+}
+.acard.on { opacity:1; transform:translateY(0); }
+.acard:hover { background:var(--surface2); }
+.aicon { font-size:1.4rem; margin-bottom:10px; }
+.atitle { font-family:'Playfair Display',serif; font-weight:700; font-size:0.92rem; color:var(--white); margin-bottom:6px; }
+.adesc { font-size:0.78rem; color:var(--off); line-height:1.55; }
+
+/* CONTACT */
+.cintro { font-size:.95rem; color:var(--off); line-height:1.8; max-width:580px; margin-bottom:36px; }
+.cintro strong { color:var(--white); font-weight:500; }
+.clinks { display:flex; flex-direction:column; }
+.clink {
+  display:flex; align-items:center; justify-content:space-between;
+  padding:16px 0; border-top:1px solid var(--line);
+  text-decoration:none;
+  transition:padding-left .2s;
+}
+.clink:last-child { border-bottom:1px solid var(--line); }
+.clink:hover { padding-left:8px; }
+.cl-l { display:flex; align-items:center; gap:14px; }
+.cl-n { font-family:'Fragment Mono',monospace; font-size:0.58rem; color:var(--dim); width:22px; }
+.cl-name { font-size:0.9rem; color:var(--white); }
+.cl-v { font-family:'Fragment Mono',monospace; font-size:0.68rem; color:var(--off); }
+.cl-arr { color:var(--dim); transition:transform .2s, color .2s; }
+.clink:hover .cl-arr { transform:translate(3px,-3px); color:var(--white); }
+
+/* FOOTER */
+footer {
+  padding:22px 48px;
+  display:flex; justify-content:space-between; align-items:center;
+}
+.ft { font-family:'Fragment Mono',monospace; font-size:0.62rem; color:var(--dim); letter-spacing:0.05em; }
+
+/* RESPONSIVE */
+@media(max-width:860px){
+  nav { padding:0 20px; }
+  .nav-links li:not(:last-child) { display:none; }
+  #hero { grid-template-columns:1fr; padding:90px 20px 44px; gap:36px; }
+  .hero-stats { border-left:none; border-top:1px solid var(--line); padding-left:0; padding-top:24px; display:grid; grid-template-columns:repeat(2,1fr); }
+  .hstat:first-child { border-top:none; }
+  .sw { grid-template-columns:1fr; }
+  .slc { padding:28px 20px 0; border-right:none; border-bottom:1px solid var(--line); }
+  .sc { padding:28px 20px; }
+  .facts { grid-template-columns:1fr; }
+  .pgrid { grid-template-columns:1fr; }
+  .agrid { grid-template-columns:1fr 1fr; }
+  footer { padding:18px 20px; flex-direction:column; gap:6px; text-align:center; }
+}
+@media(max-width:500px){
+  h1 { font-size:2.8rem; }
+  .agrid { grid-template-columns:1fr; }
+  .hero-stats { grid-template-columns:1fr 1fr; }
+}
+</style>
+</head>
+<body style="background:#0a0a0a;background-color:#0a0a0a;color:#f0f0eb;">
+
+<div class="cur" id="cur"></div>
+<div class="cur-r" id="curR"></div>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-name">Pavitr Swain</div>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#experience">Work</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+  <a href="mailto:pavitr.swain@tcs.com" class="nav-cta">Hire Me ↗</a>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-left">
+    <div class="hero-tag">
+      <span class="live-dot"></span>
+      Open to Data &amp; AI Roles — Hyderabad · Bengaluru · Chennai
+    </div>
+    <h1>Pavitr<br>Kumar<br><em>Swain.</em></h1>
+    <p class="hero-desc">
+      <strong>Data Engineer &amp; AI Builder</strong> at TCS. I turn raw data into production-grade intelligence — ML models, LLM-powered apps, and data pipelines that actually ship.
+    </p>
+    <div class="hero-btns">
+      <a href="#projects" class="btn-p">View Projects</a>
+      <a href="#contact" class="btn-s">Say Hello →</a>
+    </div>
+  </div>
+  <div class="hero-stats">
+    <div class="hstat"><div class="hstat-n">9+</div><div class="hstat-l">Months at TCS</div></div>
+    <div class="hstat"><div class="hstat-n">25%</div><div class="hstat-l">Inference Speed Gain</div></div>
+    <div class="hstat"><div class="hstat-n">5h</div><div class="hstat-l">Saved per Week</div></div>
+    <div class="hstat"><div class="hstat-n">6</div><div class="hstat-l">Certifications</div></div>
+  </div>
+  <div class="hero-scroll"><div class="scroll-bar"></div>Scroll</div>
+</section>
+
+<!-- ABOUT -->
+<div class="sw" id="about">
+  <div class="slc"><span>01 / About</span></div>
+  <div class="sc">
+    <h2 class="sh">A short version.<br><em>The longer one is over coffee.</em></h2>
+    <p>I'm a <strong>Data & AI Engineer</strong> at Tata Consultancy Services, working on data engineering and analytics workflows within enterprise systems. I graduated with a BCA from Osmania University in 2025.</p>
+    <p>Before TCS, I interned at <strong>VISWAM.AI at IIIT Hyderabad</strong> — fine-tuning LLM workflows with HuggingFace, building Gen AI tools with LangChain &amp; Streamlit, and improving model inference by <strong>25%</strong>. At JK Agri Genetics I automated reporting and saved the team <strong>5 hours every week</strong>.</p>
+    <p>I'm the founder of <strong>TechVerse Hub</strong> and an active member of GDG Hyderabad and Google Cloud Community India. Actively targeting <strong>Data Analyst, Data Scientist, AI/ML Engineer</strong> and <strong>Data Engineer</strong> roles.</p>
+    <div class="facts">
+      <div class="fact"><div class="fk">Location</div><div class="fv">Mumbai → Open to Hyderabad / Bengaluru / Chennai</div></div>
+      <div class="fact"><div class="fk">Current Role</div><div class="fv">Engineer @ TCS — Data Engineering</div></div>
+      <div class="fact"><div class="fk">Education</div><div class="fv">BCA, Osmania University — 2025</div></div>
+      <div class="fact"><div class="fk">Languages</div><div class="fv">English · Hindi · Telugu · Odia</div></div>
+      <div class="fact"><div class="fk">Target Roles</div><div class="fv">Data Analyst · Data Scientist · AI/ML · Data Engineer</div></div>
+      <div class="fact"><div class="fk">Community</div><div class="fv">TechVerse Hub Founder · GDG Hyderabad · Google Cloud India</div></div>
+    </div>
+  </div>
+</div>
+
+<!-- SKILLS -->
+<div class="sw" id="skills">
+  <div class="slc"><span>02 / Stack</span></div>
+  <div class="sc">
+    <h2 class="sh">Tools I reach for.</h2>
+    <table class="stbl">
+      <tr><td>Languages</td><td><div class="pills"><span class="pill">Python</span><span class="pill">SQL</span><span class="pill">Java</span><span class="pill">HTML/CSS</span></div></td></tr>
+      <tr><td>AI / ML</td><td><div class="pills"><span class="pill">Machine Learning</span><span class="pill">NLP</span><span class="pill">SMOTE</span><span class="pill">PCA</span><span class="pill">Feature Eng.</span><span class="pill">Scikit-learn</span></div></td></tr>
+      <tr><td>Generative AI</td><td><div class="pills"><span class="pill">LangChain</span><span class="pill">LLMs</span><span class="pill">RAG</span><span class="pill">HuggingFace</span><span class="pill">Streamlit</span><span class="pill">OpenAI API</span><span class="pill">Prompt Eng.</span></div></td></tr>
+      <tr><td>Data Eng.</td><td><div class="pills"><span class="pill">ETL Pipelines</span><span class="pill">PostgreSQL</span><span class="pill">Kafka</span><span class="pill">Vector DBs</span><span class="pill">FastAPI</span><span class="pill">Django</span></div></td></tr>
+      <tr><td>Cloud & DevOps</td><td><div class="pills"><span class="pill">Azure</span><span class="pill">AWS</span><span class="pill">Git</span><span class="pill">Docker</span><span class="pill">CI/CD</span><span class="pill">Firebase</span></div></td></tr>
+      <tr><td>Analytics</td><td><div class="pills"><span class="pill">Power BI</span><span class="pill">Excel</span><span class="pill">Jupyter</span><span class="pill">Google Colab</span><span class="pill">Angular</span></div></td></tr>
+    </table>
+  </div>
+</div>
+
+<!-- EXPERIENCE -->
+<div class="sw" id="experience">
+  <div class="slc"><span>03 / Work</span></div>
+  <div class="sc">
+    <h2 class="sh">Where I've worked.</h2>
+
+    <div class="exp">
+      <div>
+        <div class="exp-role">Engineer — Data Engineering</div>
+        <div class="exp-co">Tata Consultancy Services · Mumbai</div>
+        <ul class="exp-ul">
+          <li>Data engineering and analytics workflows within enterprise production systems</li>
+          <li>SQL for querying, validation, and data checks across pipelines</li>
+          <li>Backend development with Python (Django / FastAPI) and REST API workflows</li>
+          <li>Kafka and real-time data handling; incident management and production support</li>
+        </ul>
+      </div>
+      <div class="exp-period">Feb 2026 — Now</div>
+    </div>
+
+    <div class="exp">
+      <div>
+        <div class="exp-role">Graduate Trainee</div>
+        <div class="exp-co">Tata Consultancy Services · Chennai</div>
+        <ul class="exp-ul">
+          <li>Multi-tech training: Python, Angular, SQL, Git, Docker, DevOps, AI/ML</li>
+          <li>Frontend Developer on internal LMS — built UI components, routing &amp; interfaces</li>
+          <li>Built HR Support Chatbot using LLM concepts for internal query automation</li>
+          <li>🏆 Ignite Champion Award &amp; LIREL Values Champion Award</li>
+        </ul>
+      </div>
+      <div class="exp-period">Sept 2025 — Jan 2026</div>
+    </div>
+
+    <div class="exp">
+      <div>
+        <div class="exp-role">AI Developer Intern</div>
+        <div class="exp-co">VISWAM.AI · IIIT Hyderabad</div>
+        <ul class="exp-ul">
+          <li>Fine-tuned LLM workflows using HuggingFace Transformers</li>
+          <li>Built Gen AI tools using LangChain &amp; Streamlit</li>
+          <li>Cut model inference time by 25% by optimizing API calls</li>
+          <li>Collaborated with 5+ researchers at IIIT Hyderabad</li>
+        </ul>
+      </div>
+      <div class="exp-period">Jun 2025 — Sept 2025</div>
+    </div>
+
+    <div class="exp">
+      <div>
+        <div class="exp-role">Data Analysis Intern</div>
+        <div class="exp-co">JK Agri Genetics Limited · Hyderabad</div>
+        <ul class="exp-ul">
+          <li>Cleaned and analyzed sales/operations data using Excel &amp; Python</li>
+          <li>Automated reporting — saved the team ~5 hrs/week</li>
+        </ul>
+      </div>
+      <div class="exp-period">Apr 2025 — Jun 2025</div>
+    </div>
+  </div>
+</div>
+
+<!-- PROJECTS -->
+<div class="sw" id="projects">
+  <div class="slc"><span>04 / Projects</span></div>
+  <div class="sc">
+    <h2 class="sh">Selected work.</h2>
+    <div class="pgrid">
+      <div class="pcard">
+        <div class="pnum">PRJ / 01</div>
+        <div class="ptitle">Credit Card Fraud Detection</div>
+        <div class="pdesc">ML pipeline for detecting fraudulent transactions. Tackled class imbalance with SMOTE, built Logistic Regression &amp; Random Forest models, evaluated with F1 and AUC-ROC metrics.</div>
+        <div class="ppills"><span class="ppill">Python</span><span class="ppill">Scikit-learn</span><span class="ppill">SMOTE</span><span class="ppill">Random Forest</span><span class="ppill">PCA</span></div>
+      </div>
+      <div class="pcard">
+        <div class="pnum">PRJ / 02</div>
+        <div class="ptitle">Personalized Learning Management System</div>
+        <div class="pdesc">TCS internal project. Angular dashboard, ETL pipelines for analytics, AI-based LLM features for user interaction. Contributed from wireframes through to production.</div>
+        <div class="ppills"><span class="ppill">Angular</span><span class="ppill">ETL</span><span class="ppill">LLM</span><span class="ppill">Data Integration</span></div>
+      </div>
+      <div class="pcard">
+        <div class="pnum">PRJ / 03</div>
+        <div class="ptitle">HR Support Chatbot</div>
+        <div class="pdesc">LLM-powered chatbot for internal HR query resolution at TCS. Reduced repetitive HR questions via NLP-based intent handling and foundational LLM concepts.</div>
+        <div class="ppills"><span class="ppill">LLMs</span><span class="ppill">LangChain</span><span class="ppill">Python</span><span class="ppill">NLP</span></div>
+      </div>
+      <div class="pcard">
+        <div class="pnum">PRJ / 04</div>
+        <div class="ptitle">Gen AI Tooling @ VISWAM.AI</div>
+        <div class="pdesc">Internal Gen AI tools at IIIT Hyderabad using LangChain, Streamlit &amp; HuggingFace. Optimized the inference pipeline — 25% faster response times in production.</div>
+        <div class="ppills"><span class="ppill">LangChain</span><span class="ppill">HuggingFace</span><span class="ppill">Streamlit</span><span class="ppill">OpenAI API</span></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- CERTS -->
+<div class="sw" id="certs">
+  <div class="slc"><span>05 / Certs</span></div>
+  <div class="sc">
+    <h2 class="sh">Credentials.</h2>
+    <div class="clist">
+      <div class="crow"><div class="cnum">01</div><div class="cname">Azure Administrator Associate</div><div class="cby">Microsoft</div></div>
+      <div class="crow"><div class="cnum">02</div><div class="cname">Data Analysis Using Python</div><div class="cby">IBM</div></div>
+      <div class="crow"><div class="cnum">03</div><div class="cname">Machine Learning for Data Science Projects</div><div class="cby">IBM</div></div>
+      <div class="crow"><div class="cnum">04</div><div class="cname">Career Essentials in Data Analysis</div><div class="cby">Microsoft &amp; LinkedIn</div></div>
+      <div class="crow"><div class="cnum">05</div><div class="cname">BCG Data Science Job Simulation</div><div class="cby">BCG via Forage</div></div>
+      <div class="crow"><div class="cnum">06</div><div class="cname">Microsoft Fabric &amp; Power Platforms</div><div class="cby">Microsoft</div></div>
+    </div>
+  </div>
+</div>
+
+<!-- ACHIEVEMENTS -->
+<div class="sw" id="achievements">
+  <div class="slc"><span>06 / Wins</span></div>
+  <div class="sc">
+    <h2 class="sh">Highlights.</h2>
+    <div class="agrid">
+      <div class="acard"><div class="aicon">🏆</div><div class="atitle">Ignite Champion</div><div class="adesc">TCS Ignite Program recognition for outstanding contribution</div></div>
+      <div class="acard"><div class="aicon">⭐</div><div class="atitle">LIREL Values Champion</div><div class="adesc">Award for exemplifying TCS core values across teams</div></div>
+      <div class="acard"><div class="aicon">🚀</div><div class="atitle">TechVerse Hub Founder</div><div class="adesc">Built &amp; led a tech community in Greater Hyderabad for 1+ year</div></div>
+      <div class="acard"><div class="aicon">🌐</div><div class="atitle">GDG Hyderabad</div><div class="adesc">Active in Google Developers Group &amp; Google Cloud Community India</div></div>
+      <div class="acard"><div class="aicon">🎯</div><div class="atitle">AI Bootcamps &amp; Hackathons</div><div class="adesc">Multiple AI bootcamps, hackathons &amp; technical meetups attended</div></div>
+    </div>
+  </div>
+</div>
+
+<!-- CONTACT -->
+<div class="sw" id="contact">
+  <div class="slc"><span>07 / Contact</span></div>
+  <div class="sc">
+    <h2 class="sh">Let's talk.<br><em>Open to Data &amp; AI roles.</em></h2>
+    <p class="cintro">I'm actively looking for <strong>Data Analyst, Data Scientist, AI/ML Engineer</strong> and <strong>Data Engineer</strong> roles. If you have an opportunity or just want to talk — reach out.</p>
+    <div class="clinks">
+      <a href="mailto:pavitr.swain@tcs.com" class="clink">
+        <div class="cl-l"><span class="cl-n">01</span><span class="cl-name">Email</span></div>
+        <div class="cl-v">pavitr.swain@tcs.com</div>
+        <span class="cl-arr">↗</span>
+      </a>
+      <a href="https://linkedin.com/in/pavitr-swain" target="_blank" class="clink">
+        <div class="cl-l"><span class="cl-n">02</span><span class="cl-name">LinkedIn</span></div>
+        <div class="cl-v">linkedin.com/in/pavitr-swain</div>
+        <span class="cl-arr">↗</span>
+      </a>
+      <a href="https://github.com/Pavitr-Swain" target="_blank" class="clink">
+        <div class="cl-l"><span class="cl-n">03</span><span class="cl-name">GitHub</span></div>
+        <div class="cl-v">github.com/Pavitr-Swain</div>
+        <span class="cl-arr">↗</span>
+      </a>
+      <a href="tel:+919391113907" class="clink">
+        <div class="cl-l"><span class="cl-n">04</span><span class="cl-name">Phone</span></div>
+        <div class="cl-v">+91 93911 13907</div>
+        <span class="cl-arr">↗</span>
+      </a>
+    </div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="ft">© 2026 Pavitr Kumar Swain</div>
+  <div class="ft">Designed in the AI era ✦</div>
+</footer>
+
+<script>
+// Cursor
+const cur=document.getElementById('cur'), curR=document.getElementById('curR');
+let mx=0,my=0,rx=0,ry=0;
+document.addEventListener('mousemove',e=>{ mx=e.clientX; my=e.clientY; cur.style.left=mx+'px'; cur.style.top=my+'px'; });
+(function loop(){ rx+=(mx-rx)*.1; ry+=(my-ry)*.1; curR.style.left=rx+'px'; curR.style.top=ry+'px'; requestAnimationFrame(loop); })();
+
+// Scroll reveal
+const els = document.querySelectorAll('.exp,.pcard,.crow,.acard');
+const obs = new IntersectionObserver(entries=>{
+  entries.forEach((e,i)=>{ if(e.isIntersecting) setTimeout(()=>e.target.classList.add('on'), i*55); });
+},{threshold:.08});
+els.forEach(el=>obs.observe(el));
+</script>
+</body>
+</html>
