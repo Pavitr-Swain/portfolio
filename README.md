@@ -88,7 +88,7 @@ Everything lives in `index.html`. Open it in VS Code or edit directly on GitHub.
 
 ## 📬 Contact
 
-- **Email** → pavitr.swain@tcs.com
+- **Email** → pavitrkumar1573@gmail.com
 - **LinkedIn** → [linkedin.com/in/pavitr-swain](https://linkedin.com/in/pavitr-swain)
 - **GitHub** → [github.com/Pavitr-Swain](https://github.com/Pavitr-Swain)
 
